@@ -8,28 +8,38 @@ class Lista extends React.Component {
 
   constructor(props){
     super(props);
-
-    this.state = {payload: []};
+    console.log(`constructor`);
+    console.log(props);
   }
+
   componentDidMount(){
-    
     const { dispatch } = this.props;
     dispatch({type: 'GET_USUARIO'});
   }
+
   render(){
-      return(
-          <Table>
-              <TableHeader>
-              <TableRow>
-                  <TableHeaderColumn>ID</TableHeaderColumn>
-                  <TableHeaderColumn>Name</TableHeaderColumn>
-              </TableRow>
-              </TableHeader>
-              <Linhas data={this.state.payload} />
-          </Table>
-          )
-      }
+    console.log(`vai renderizar`);
+    console.log(this.props.payload);
+
+    return(
+      <Table>
+          <TableHeader>
+            <TableRow>
+                <TableHeaderColumn>ID</TableHeaderColumn>
+                <TableHeaderColumn>Name</TableHeaderColumn>
+            </TableRow>
+          </TableHeader>
+          <Linhas data={this.props.payload}/>
+      </Table>
+    );
+  }
+
 };
 
-Lista = connect(lista)(Lista);
+Lista.defaultProps = { payload : [] };
+Lista = connect(
+  (state, props) => {
+    return {payload : state.listas.payload};
+  }
+)(Lista);
 export default Lista;

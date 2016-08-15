@@ -1,19 +1,21 @@
 import React from 'react';
+import {TableBody, TableRow, TableRowColumn} from 'material-ui/Table';
+
 
 class Linhas extends React.Component {
   constructor(props){
     super(props);
-    console.log(props);
   }
   render() {
-    var rows = this.props.data.map(function(user) {
+    const rows = this.props.data.map(function(user,i) {
       return (
-        <TableRow>
-            <TableRowColumn>user.id</TableRowColumn>
-            <TableRowColumn>user.name</TableRowColumn>
+        <TableRow key={i}>
+            <TableRowColumn>{user.id}</TableRowColumn>
+            <TableRowColumn>{user.name}</TableRowColumn>
         </TableRow>
       );
     });
+
     return (
       <TableBody>
         {rows}
