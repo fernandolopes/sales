@@ -17,7 +17,12 @@ const store = createStore(
   applyMiddleware(sagaMiddleware)
 );
 
-  sagaMiddleware.run(rootSaga);
+sagaMiddleware.run(rootSaga);
+
+store.subscribe(function() {
+  console.log('passou aqui no listen');
+  console.log(store.getState().listas);
+});
 
 ReactDOM.render(
        <Provider store={store}>
